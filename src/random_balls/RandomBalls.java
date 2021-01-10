@@ -9,27 +9,24 @@
  import java.awt.event.MouseAdapter;
  import java.awt.event.MouseEvent;
  import java.util.ArrayList;
- import random_balls.Ball;
  
- public class RandomBalls extends JFrame {
+ class RandomBalls extends JFrame {
 
-	final String TITLE_OF_PROGRAM = "Random Balls";
-	final int WINDOW_WIDTH = 650;
-	final int WINDOW_HEIGHT = 650;
-	final Color[] COLORS = {Color.red, Color.green, Color.blue};
-	final int COUNT_BALLS = 100;
+	private final String TITLE_OF_PROGRAM = "Random Balls";
+	private final int WINDOW_WIDTH = 650;
+	private final int WINDOW_HEIGHT = 650;
+	private final Color[] COLORS = {Color.red, Color.green, Color.blue};
+	private final int COUNT_BALLS = 100;
 	
-	int showDelay = 1000;
-	int counter = 0;
-	Random random;
-	ArrayList<Ball> balls;
-	Canvas canvas;
-
-/* 	public static void main(String[] args) {
-		new RandomBalls().game();
-	} */
+	private int showDelay = 1000;
+	private int counter = 0;
+	private Random random;
+	private ArrayList<Ball> balls;
+	private Canvas canvas;
 	 
-	public RandomBalls() {
+	RandomBalls() {
+		super();
+		
 		random = new Random();
 		balls = new ArrayList<>();
 		
@@ -54,7 +51,7 @@
 		setVisible(true);
 	}
 	
-	void addBall() {
+	private void addBall() {
 		int d = random.nextInt(20) + 60;
 		int x = random.nextInt(WINDOW_WIDTH - d);
 		int y = random.nextInt(WINDOW_HEIGHT - d);
@@ -62,19 +59,19 @@
 		balls.add(new Ball(x, y, d, color));
 	}
 	
-	void deleteBall(int x, int y) {
+	private void deleteBall(int x, int y) {
 		for (int i = balls.size() - 1; i > -1; i--) {
-			double dx = balls.get(i).x + balls.get(i).d/2 - x;
-			double dy = balls.get(i).y  + balls.get(i).d/2 - y;
+			double dx = balls.get(i).getX() + balls.get(i).getD()/2 - x;
+			double dy = balls.get(i).getY() + balls.get(i).getD()/2 - y;
 			double d = Math.sqrt(dx * dx + dy * dy);
-			if (d < balls.get(i).d/2) {
+			if (d < balls.get(i).getD()/2) {
 				balls.remove(i);
 				break;
 			}
 		}
 	}
 	
-	public void game() {
+	void game() {
 		while (true) {
 			addBall();
 			if (balls.size() >= 5) {
