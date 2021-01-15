@@ -23,8 +23,12 @@
 	private Random random;
 	private ArrayList<Ball> balls;
 	private Canvas canvas;
+	
+	public static void main(String[] args) {
+		new RandomBalls().game();
+	}
 	 
-	RandomBalls() {
+	private RandomBalls() {
 		super();
 		
 		random = new Random();
@@ -71,7 +75,7 @@
 		}
 	}
 	
-	void game() {
+	private void game() {
 		while (true) {
 			addBall();
 			if (balls.size() >= 5) {
